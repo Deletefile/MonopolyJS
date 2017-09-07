@@ -1,0 +1,11 @@
+{
+  "name": "monopoly",
+  "version": "1.0.0",
+  "description": "a monopoly game",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests/**/*.js"
+  },
+  "author": "reda kassame",
+  "license": "ISC"
+}
