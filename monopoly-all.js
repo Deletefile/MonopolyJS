@@ -67,7 +67,7 @@ square[39] = new Square(39,"Boardwalk");
 var Monopoly = function(rounds,players){
   this.rounds   = rounds;
   this.players  = players;
-  this.playMonopoly(){
+  this.playMonopoly = function(){
     for(var i=1; i<=players; i++) {
       var nameFromInput   = document.getElementById("name").value;
       var colorFromInput  = document.getElementById("color").value;
