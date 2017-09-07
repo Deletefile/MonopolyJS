@@ -8,11 +8,8 @@ var Player = function(name, color, money){
   this.jail   = false;
   this.visit  = false;
 
-  this.getPlayerName = function(){
-    alert(this.name);
-  }
-  this.getPlayerMoney = function(){
-    alert(this.money);
+  this.setPlayerMoney = function(amount){
+    this.money = amount
   }
   this.getPlayerColor = function(){
     alert(this.color);
@@ -83,7 +80,10 @@ var Monopoly = function(rounds,players){
       var colorFromInput  = 89;
       var moneyFromInput  = 89;
 		  player[i]  = new Player(nameFromInput, colorFromInput, moneyFromInput);
-      console.log(player[i].pos);
+      console.log(i+")"+player[i].money);
+      player[i].setPlayerMoney(player[i].money+500);
+      console.log(i+")"+player[i].money);
+
       //sll players are set at GO by default "this.pos = 0;"
     }
   }

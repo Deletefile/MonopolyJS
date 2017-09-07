@@ -2,10 +2,13 @@
   "name": "monopoly",
   "version": "1.0.0",
   "description": "a monopoly game",
-  "main": "index.js",
+  "main": "./src/monopoly-all.js",
   "scripts": {
     "test": "mocha ./tests/**/*.js"
   },
   "author": "reda kassame",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.1.2"
+  }
 }
