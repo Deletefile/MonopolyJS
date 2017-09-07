@@ -59,7 +59,7 @@ square[28] = new Square(28,"Water Works");
 square[29] = new Square(29,"Marvin Gardens");
 square[30] = new Square(30,"Go to Jail");
 square[31] = new Square(31,"Pacific Avenue");
-square[32] = new Square(30,"North Carolina Avenue");
+square[32] = new Square(32,"North Carolina Avenue");
 square[33] = new Square(33,"Community Chest");
 square[34] = new Square(34,"Pennsylvania Avenue");
 square[35] = new Square(35,"Short Line");
@@ -105,11 +105,11 @@ var Monopoly = function(rounds,players){
     this.rolled   = false;
   }
   this.movePlayer = function(){
-
-    if(this.player[i]+total>=39){
-      this.player[i].setPosition(this.player[i].pos+total-39);
+    var num = this.player[i].getPlayerPos()+total;
+    if(num>=39){
+      this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
     }else{
-      this.player[i].setPosition(this.player[i].pos+total);
+      this.player[i].setPosition(this.player[i].getPlayerPos()+total);
     }
   }
 
