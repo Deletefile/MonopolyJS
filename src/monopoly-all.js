@@ -105,11 +105,11 @@ var Monopoly = function(rounds,players){
     this.rolled   = false;
   }
   this.movePlayer = function(){
-    var num = total;
-    if(this.player[i]+num>=39){
-      this.player[i].setPosition(this.player[i].pos+num-39);
+
+    if(this.player[i]+total>=39){
+      this.player[i].setPosition(this.player[i].pos+total-39);
     }else{
-      this.player[i].setPosition(this.player[i].pos+num);
+      this.player[i].setPosition(this.player[i].pos+total);
     }
   }
 
