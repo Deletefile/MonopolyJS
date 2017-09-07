@@ -1,4 +1,4 @@
-//class player
+[//class player
 var Player = function(name, color, money){
   this.name   = name;
   this.color  = color;
@@ -18,6 +18,7 @@ var Player = function(name, color, money){
     alert(this.color);
   }
 };
+//class squares
 var Square = function(id,name){
   this.id   = id;
   this.name = name;
@@ -63,17 +64,22 @@ square[36] = new Square(36,"Chance");
 square[37] = new Square(37,"Park Place");
 square[38] = new Square(38,"LUXURY TAX");
 square[39] = new Square(39,"Boardwalk");
-
+//class monopoly
 var Monopoly = function(rounds,players){
+  this.bank     = 99999999999;
   this.rounds   = rounds;
   this.players  = players;
-  this.playMonopoly = function(){
+
+  this.setPlayers = function(){
     for(var i=1; i<=players; i++) {
-      var nameFromInput   = document.getElementById("name").value;
-      var colorFromInput  = document.getElementById("color").value;
-      var moneyFromInput  = document.getElementById("money").value;
+      var nameFromInput[i]   = document.getElementById("name").value;
+      var colorFromInput[i]  = document.getElementById("color").value;
+      var moneyFromInput[i]  = document.getElementById("money").value;
 		  player[i] = new Player(nameFromInput, colorFromInput, moneyFromInput);
     }
+  }
+  this.setGame = function(){
+    setPlayers();
   }
 };
 /*
@@ -85,3 +91,4 @@ var Monopoly = function(rounds,players){
 posizionare pedina
 <div class="player" id="player[i].name" style="background-color: blue; left: 0px; top: 0px;"></div>
 */
+]
