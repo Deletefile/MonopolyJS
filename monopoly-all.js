@@ -8,7 +8,7 @@ var Player = function(name, color, money){
   this.jail   = false;
   this.visit  = false;
 
-  getPlayerName = function(){
+  this.getPlayerName = function(){
     alert(this.name);
   }
   this.getPlayerMoney = function(){
@@ -64,29 +64,24 @@ square[37] = new Square(37,"Park Place");
 square[38] = new Square(38,"LUXURY TAX");
 square[39] = new Square(39,"Boardwalk");
 
-var Game = function(rounds,players){
+var Monopoly = function(rounds,players){
   this.rounds   = rounds;
   this.players  = players;
-
-
-  for (var i = 1; i <= players; i++) {
-    var nameFromInput   = document.getElementById("name").value;
-    var colorFromInput  = document.getElementById("color").value;
-    var moneyFromInput  = document.getElementById("money").value;
-		player[i] = new Player(nameFromInput, colorFromInput, moneyFromInput);
+  this.playMonopoly(){
+    for(var i=1; i<=players; i++) {
+      var nameFromInput   = document.getElementById("name").value;
+      var colorFromInput  = document.getElementById("color").value;
+      var moneyFromInput  = document.getElementById("money").value;
+		  player[i] = new Player(nameFromInput, colorFromInput, moneyFromInput);
+    }
   }
-
-  public void playGame(  )
-	{
-		for ( int i = 0; i < ROUNDS_TOTAL; i++ )
-		{
+};
+/*
+  public void playGame(){
+		for ( int i = 0; i < ROUNDS_TOTAL; i++ ){
 			playRound();
 		}
 	}
-
-
-}
-/*
 posizionare pedina
 <div class="player" id="player[i].name" style="background-color: blue; left: 0px; top: 0px;"></div>
 */
