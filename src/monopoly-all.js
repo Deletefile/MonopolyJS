@@ -7,7 +7,6 @@ var Player = function(name, color, money){
   this.order  = 0;
   this.jail   = false;
   this.visit  = false;
-  this.total  = 0;
 
   this.setPlayerMoney = function(amount){
     this.money = amount
@@ -77,7 +76,7 @@ var Monopoly = function(rounds,players){
   this.dice1    = 0;
   this.dice2    = 0;
   this.rolled   = false;
-
+  var total = 0;
   this.setPlayers = function(){
     for(var i=1; i<=players; i++){
       /*var nameFromInput   = document.getElementById("name").value;
@@ -99,17 +98,18 @@ var Monopoly = function(rounds,players){
     this.dice1  = Math.floor(Math.random() * 6) + 1;
     this.dice2  = Math.floor(Math.random() * 6) + 1;
     this.rolled  = true;
-    this.total = this.dice1+this.dice2;
-    return this.total;
+    total = this.dice1+this.dice2;
+    return total;
   }
   this.resetDice  = function(){
     this.rolled   = false;
   }
-  this.movePlayer = function(player){
-    if(this.play.pos+this.total>=39){
-      this.player[i] = this.player[i].pos+this.total-39;
+  this.movePlayer = function(){
+    var num = total;
+    if(this.player[i]+num>=39){
+      this.player[i].setPosition(this.player[i].pos+num-39);
     }else{
-      this.player[i] = this.player[i].pos+this.total;
+      this.player[i].setPosition(this.player[i].pos+num);
     }
   }
 
