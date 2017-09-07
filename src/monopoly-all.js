@@ -7,9 +7,13 @@ var Player = function(name, color, money){
   this.order  = 0;
   this.jail   = false;
   this.visit  = false;
+  this.total  = 0;
 
   this.setPlayerMoney = function(amount){
     this.money = amount
+  }
+  this.setPosition = function(position){
+    this.pos = position;
   }
   this.getPlayerColor = function(){
     alert(this.color);
@@ -69,9 +73,12 @@ var Monopoly = function(rounds,players){
   this.bank     = 99999999999;
   this.rounds   = rounds;
   this.players  = players;
+  this.player   = [];
+  this.dice1    = 0;
+  this.dice2    = 0;
+  this.rolled   = false;
 
   this.setPlayers = function(){
-    var player = [];
     for(var i=1; i<=players; i++){
       /*var nameFromInput   = document.getElementById("name").value;
       var colorFromInput  = document.getElementById("color").value;
@@ -79,14 +86,33 @@ var Monopoly = function(rounds,players){
       var nameFromInput   = 89;
       var colorFromInput  = 89;
       var moneyFromInput  = 89;
-		  player[i]  = new Player(nameFromInput, colorFromInput, moneyFromInput);
-      console.log(i+")"+player[i].money);
-      player[i].setPlayerMoney(player[i].money+500);
-      console.log(i+")"+player[i].money);
+		  this.player[i]  = new Player(nameFromInput, colorFromInput, moneyFromInput);
+      console.log(i+")"+this.player[i].money);
+      this.player[i].setPlayerMoney(this.player[i].money+500);
+      console.log(i+")"+this.player[i].money);
 
       //sll players are set at GO by default "this.pos = 0;"
     }
   }
+  this.rollDice = function(){
+
+    this.dice1  = Math.floor(Math.random() * 6) + 1;
+    this.dice2  = Math.floor(Math.random() * 6) + 1;
+    this.rolled  = true;
+    this.total = this.dice1+this.dice2;
+    return this.total;
+  }
+  this.resetDice  = function(){
+    this.rolled   = false;
+  }
+  this.movePlayer = function(player){
+    if(this.play.pos+this.total>=39){
+      this.player[i] = this.player[i].pos+this.total-39;
+    }else{
+      this.player[i] = this.player[i].pos+this.total;
+    }
+  }
+
 };
 /*
   public void playGame(){
@@ -95,5 +121,5 @@ var Monopoly = function(rounds,players){
 		}
 	}
 posizionare pedina
-<div class="player" id="player[i].name" style="background-color: blue; left: 0px; top: 0px;"></div>
+<div class="player" id="this.player[i].name" style="background-color: blue; left: 0px; top: 0px;"></div>
 */
