@@ -125,7 +125,8 @@ playRound = function(){
       monopoly.setPlayers();
 
         for(var i=1; i<=monopoly.players; i++){
-          monopoly.rollDice();
+          monopoly.rollDice();ls
+
           monopoly.movePlayer(i);
           monopoly.resetDice();
         }
