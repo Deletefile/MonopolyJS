@@ -18,7 +18,7 @@ var Player = function(name, color, money){
     alert(this.color);
   }
   this.getPlayerPos = function(){
-    return  this.pos;
+    return this.pos;
   }
 };
 //class squares
@@ -76,10 +76,11 @@ var Monopoly = function(rounds,players){
   this.dice1    = 0;
   this.dice2    = 0;
   this.rolled   = false;
-  var total = 0;
+  var total     = 0;
+  var num       = 0;
   this.setPlayers = function(){
-    for(var i=1; i<=players; i++){
-      /*var nameFromInput   = document.getElementById("name").value;
+    for(var i=1; i<=this.players; i++){
+    /*var nameFromInput   = document.getElementById("name").value;
       var colorFromInput  = document.getElementById("color").value;
       var moneyFromInput  = document.getElementById("money").value;*/
       var nameFromInput   = 89;
@@ -90,7 +91,7 @@ var Monopoly = function(rounds,players){
       this.player[i].setPlayerMoney(this.player[i].money+500);
       console.log(i+")"+this.player[i].money);
 
-      //sll players are set at GO by default "this.pos = 0;"
+      //all players are set at GO by default "this.pos = 0;"
     }
   }
   this.rollDice = function(){
@@ -105,15 +106,31 @@ var Monopoly = function(rounds,players){
     this.rolled   = false;
   }
   this.movePlayer = function(){
-    var num = this.player[i].getPlayerPos()+total;
-    if(num>=39){
-      this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
-    }else{
-      this.player[i].setPosition(this.player[i].getPlayerPos()+total);
-    }
+    var i;
+    num = this.player[i].getPlayerPos()+total;
+    console.log(i+")"+this.player[i].pos);
+      if(num>=39){
+        this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
+        console.log(i+")"+this.player[i].pos);
+      }else{
+        this.player[i].setPosition(this.player[i].getPlayerPos()+total);
+      console.log(i+")"+this.player[i].pos);
+      }
   }
-
 };
+playRound = function(){
+  var numPlayers = 5;
+    if(numPlayers>=2 && numPlayers<=8){
+      monopoly = new Monopoly(20,numPlayers);
+      console.log("giocatori = "+monopoly.players);
+      monopoly.setPlayers();
+        for(var i=1; i<=monopoly.players; i++){
+          monopoly.rollDice();
+          monopoly.movePlayer(monopoly.player[i]);
+          monopoly.resetDice();
+        }
+    }
+}
 /*
   public void playGame(){
 		for ( int i = 0; i < ROUNDS_TOTAL; i++ ){
