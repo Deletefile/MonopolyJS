@@ -105,17 +105,16 @@ var Monopoly = function(rounds,players){
   this.resetDice  = function(){
     this.rolled   = false;
   }
-  this.movePlayer = function(){
-    var i;
-    num = this.player[i].getPlayerPos()+total;
-    console.log(i+")"+this.player[i].pos);
+  this.movePlayer = function(id){
+    var i = id;
+    num = this.player[i].getPlayerPos+total;
       if(num>=39){
         this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
         console.log(i+")"+this.player[i].pos);
       }else{
         this.player[i].setPosition(this.player[i].getPlayerPos()+total);
       console.log(i+")"+this.player[i].pos);
-      }
+    }
   }
 };
 playRound = function(){
@@ -124,11 +123,13 @@ playRound = function(){
       monopoly = new Monopoly(20,numPlayers);
       console.log("giocatori = "+monopoly.players);
       monopoly.setPlayers();
+
         for(var i=1; i<=monopoly.players; i++){
           monopoly.rollDice();
-          monopoly.movePlayer(monopoly.player[i]);
+          monopoly.movePlayer(i);
           monopoly.resetDice();
         }
+
     }
 }
 /*
