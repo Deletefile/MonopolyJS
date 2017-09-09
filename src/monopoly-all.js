@@ -87,12 +87,9 @@ var Monopoly = function(rounds,players){
       var colorFromInput  = 89;
       var moneyFromInput  = 89;
 		  this.player[i]  = new Player(nameFromInput, colorFromInput, moneyFromInput);
-      console.log(i+")"+this.player[i].money);
-      this.player[i].setPlayerMoney(this.player[i].money+500);
-      console.log(i+")"+this.player[i].money);
-
       //all players are set at GO by default "this.pos = 0;"
     }
+    console.log("[*]Giocatori generati correttamente!");
   }
   this.rollDice = function(){
 
@@ -107,7 +104,7 @@ var Monopoly = function(rounds,players){
   }
   this.movePlayer = function(id){
     var i = id;
-    num = this.player[i].getPlayerPos+total;
+    num = this.player[i].getPlayerPos()+total;
       if(num>=39){
         this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
         console.log(i+")"+this.player[i].pos);
@@ -121,23 +118,35 @@ playRound = function(){
   var numPlayers = 5;
     if(numPlayers>=2 && numPlayers<=8){
       monopoly = new Monopoly(20,numPlayers);
-      console.log("giocatori = "+monopoly.players);
+      console.log("[*]Generati "+monopoly.players+" giocatori.");
+      console.log("[*]Setto i giocatori.");
       monopoly.setPlayers();
-
+      for(var k=1; k<=monopoly.rounds;k++){
+        console.log("[-"+k+"-]Round");
         for(var i=1; i<=monopoly.players; i++){
           monopoly.rollDice();
           monopoly.movePlayer(i);
           monopoly.resetDice();
         }
-
+      }
+    }else{
+      console.log("Set a number between 2 and 8.");
     }
 }
 /*
-  public void playGame(){
-		for ( int i = 0; i < ROUNDS_TOTAL; i++ ){
-			playRound();
-		}
-	}
 posizionare pedina
 <div class="player" id="this.player[i].name" style="background-color: blue; left: 0px; top: 0px;"></div>
+
+
+
+
+function incrementValue() {
+var value = 1;
+  value++;
+  document.getElementById('number').value = value;
+  if (value <= 10) {
+    document.getElementById('coso').innerHTML += "test<br>";
+  }
+}
+
 */
