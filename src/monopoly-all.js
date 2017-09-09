@@ -133,6 +133,7 @@ playRound = function(){
       console.log("Set a number between 2 and 8.");
     }
 }
+
 /*
 posizionare pedina
 <div class="player" id="this.player[i].name" style="background-color: blue; left: 0px; top: 0px;"></div>
