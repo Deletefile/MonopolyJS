@@ -31,7 +31,7 @@ square[0]  = new Square(0,"GO");
 square[1]  = new Square(1,"Mediterranean Avenue");
 square[2]  = new Square(2,"Community Chest");
 square[3]  = new Square(3,"Baltic Avenue");
-square[4]  = new Square(4,"City Tax");
+square[4]  = new Square(4,"Income Tax");
 square[5]  = new Square(5,"Reading Railroad");
 square[6]  = new Square(6,"Oriental Avenue");
 square[7]  = new Square(7,"Chance");
@@ -107,32 +107,54 @@ var Monopoly = function(rounds,players){
     num = this.player[i].getPlayerPos()+total;
       if(num>=39){
         this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
-        //give 200€ for pasing go
-        moneyToPlayer(200,i);
+        //give 200€ for pasing go or landing on go
+        this.moneyToPlayer(200,i);
         console.log(i+")"+this.player[i].pos);
       }else{
         this.player[i].setPosition(this.player[i].getPlayerPos()+total);
       console.log(i+")"+this.player[i].pos);
     }
+      if(this.player[i].getPlayerPos() == 30){
+        //the player is in jail
+        //so is sent to just Visiting
+        this.player[i].setPosition(10);
+      }
+      if(this.player[i].getPlayerPos() == 4){
+        //income TAX
+        if(this.player[i].money*20/100 < 200){
+          this.moneyFromPlayer(this.player[i].money*20/100,i);
+        }else{
+          this.moneyFromPlayer(200,i);
+        }
+      }
+      if(this.player[i].getPlayerPos() == 38){
+        //luxury tax
+        this.moneyFromPlayer(75,i);
+      }
   }
   this.moneyToPlayer = function(amount,id){
     this.player[id].setPlayerMoney(this.player[id].money+amount);
+  }
+  this.moneyFromPlayer = function(amount,id){
+    this.player[id].setPlayerMoney(this.player[id].money-amount);
   }
 };
 playRound = function(){
   var numPlayers = 5;
     if(numPlayers>=2 && numPlayers<=8){
       monopoly = new Monopoly(20,numPlayers);
-      console.log("[*]Generati "+monopoly.players+" giocatori.");
+      console.log("[*]Genero "+monopoly.players+" giocatori.");
       console.log("[*]Setto i giocatori.");
       monopoly.setPlayers();
+
       for(var k=1; k<=monopoly.rounds;k++){
-        console.log("[-"+k+"-]Round");
-        for(var i=1; i<=monopoly.players; i++){
-          monopoly.rollDice();
-          monopoly.movePlayer(i);
-          monopoly.resetDice();
-        }
+        console.log("["+k+" Round]");
+
+          for(var i=1; i<=monopoly.players; i++){
+            monopoly.rollDice();
+            monopoly.movePlayer(i);
+            monopoly.resetDice();
+          }
       }
     }else{
       console.log("Set a number between 2 and 8.");
