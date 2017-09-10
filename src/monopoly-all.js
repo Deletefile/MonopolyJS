@@ -95,7 +95,7 @@ var Monopoly = function(rounds,players){
 
     this.dice1  = Math.floor(Math.random() * 6) + 1;
     this.dice2  = Math.floor(Math.random() * 6) + 1;
-    this.rolled  = true;
+    this.rolled = true;
     total = this.dice1+this.dice2;
     return total;
   }
@@ -107,11 +107,16 @@ var Monopoly = function(rounds,players){
     num = this.player[i].getPlayerPos()+total;
       if(num>=39){
         this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
+        //give 200€ for pasing go
+        moneyToPlayer(200,i);
         console.log(i+")"+this.player[i].pos);
       }else{
         this.player[i].setPosition(this.player[i].getPlayerPos()+total);
       console.log(i+")"+this.player[i].pos);
     }
+  }
+  this.moneyToPlayer = function(amount,id){
+    this.player[id].setPlayerMoney(this.player[id].money+amount);
   }
 };
 playRound = function(){
