@@ -1,4 +1,4 @@
-<html>
+    <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,11 +29,19 @@
           }
         </script>
   		</div>
-      <div class="col2">
-
-        dlskdlsdksldk
+      <div id="first_div" style="display:block">
+          <form>
+    Number of Players
+    <input type="text" id="n_players"/>
+    <input type="button" value="set" onclick="generateTextBoxes()" />
+    <div id="pl"></div>
+  </form>
       </div>
-  		<div class="col3">
+
+      <div id="second_div" style="display:none">
+      </div>
+
+      <div class="col3">
         <script>
           for(var i=10; i<=19; i++){
             if(i==19){

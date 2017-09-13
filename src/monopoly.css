@@ -21,7 +21,7 @@ Elements
 	float: left;
 	width: 75px;
 }
-.col2{
+#first_div, #second_div{
 	position: absolute;
 	top: 250px;
 	left: 200px;
@@ -30,6 +30,8 @@ Elements
 	border: 2px solid black;
 	padding: 10px;
 	background-color: white;
+  word-break: break-all;
+  overflow-y: scroll;
   }
 .col3{
 	float: right;
