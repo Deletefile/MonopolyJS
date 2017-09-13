@@ -46,11 +46,12 @@ Elements
 	width: 75px;
 	font: bold 12px "Arial", "Helvetica", sans-serif;
 	text-align: center;
+  word-break: break-all;
 }
 .player {
   height: 12px;
   width: 12px;
-  position: absolute;
+  position: relative;
   top: 0px;
   left: 0px;
 }
