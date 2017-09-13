@@ -5,27 +5,30 @@ var Player = function(name, color, money){
   this.money  = money;
   this.pos    = 0;
   this.order  = 0;
-  this.jail   = false;
-  this.visit  = false;
 
   this.setPlayerMoney = function(amount){
     this.money = amount
   }
+
   this.setPosition = function(position){
     this.pos = position;
   }
+
   this.getPlayerColor = function(){
     alert(this.color);
   }
+
   this.getPlayerPos = function(){
     return this.pos;
   }
+
 };
 //class squares
 var Square = function(id,name){
   this.id   = id;
   this.name = name;
 };
+
 var square = [];
 square[0]  = new Square(0,"GO");
 square[1]  = new Square(1,"Mediterranean Avenue");
@@ -77,6 +80,7 @@ var Monopoly = function(rounds,players){
   this.rolled   = false;
   var total     = 0;
   var num       = 0;
+
   this.setPlayers = function(){
     swapDiv('first_div','second_div');
     for(var i=1; i<=this.players; i++){
@@ -84,34 +88,38 @@ var Monopoly = function(rounds,players){
       var colorFromInput  = document.getElementById("player_color"+i).value;
       this.player[i]  = new Player(nameFromInput, colorFromInput, 1500);
       //all players are set at GO by default "this.pos = 0;"
-      document.getElementById("square0").innerHTML += "<div class='player' id='coso' style='background-color:"+monopoly.player[i].color+"; left: 0px; top: 0px;'></div>";
+      document.getElementById("square0").innerHTML += "<div class='player' id='player"+i+"' style='background-color:"+monopoly.player[i].color+"; left: 0px; top: 0px;'></div>";
     }
     document.getElementById("second_div").innerHTML += "[*]Giocatori generati correttamente!<br>";
   }
-  this.rollDice = function(){
 
+  this.rollDice = function(){
     this.dice1  = Math.floor(Math.random() * 6) + 1;
     this.dice2  = Math.floor(Math.random() * 6) + 1;
     this.rolled = true;
     total = this.dice1+this.dice2;
     return total;
   }
+
   this.resetDice  = function(){
     this.rolled   = false;
   }
+
   this.movePlayer = function(id){
     var i = id;
     num = this.player[i].getPlayerPos()+total;
+    var pop = "player"+id;
       if(num>=39){
-
-
         this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
-
+        var square = "square"+this.player[i].getPlayerPos();
+        movePos(pop,square);
         //give 200€ for pasing go or landing on go
         this.moneyToPlayer(200,i);
           document.getElementById("second_div").innerHTML += "("+this.player[i].name+")"+this.player[i].pos+"<br>";
       }else{
         this.player[i].setPosition(this.player[i].getPlayerPos()+total);
+        var square = "square"+this.player[i].getPlayerPos();
+        movePos(pop,square);
           document.getElementById("second_div").innerHTML += "("+this.player[i].name+")"+this.player[i].pos+"<br>";
     }
       if(this.player[i].getPlayerPos() == 30){
@@ -132,24 +140,25 @@ var Monopoly = function(rounds,players){
         this.moneyFromPlayer(75,i);
       }
   }
+
   this.moneyToPlayer = function(amount,id){
     this.player[id].setPlayerMoney(this.player[id].money+amount);
   }
+
   this.moneyFromPlayer = function(amount,id){
     this.player[id].setPlayerMoney(this.player[id].money-amount);
   }
 };
+
 playGame = function(number){
   var numPlayers = number;
     if(numPlayers>=2 && numPlayers<=8){
       monopoly = new Monopoly(20,numPlayers);
       document.getElementById("second_div").innerHTML += "[*]Genero "+monopoly.players+" giocatori.<br>";
       document.getElementById("second_div").innerHTML += "[*]Setto i giocatori.<br>";
-
       monopoly.setPlayers();
       var k = 1;
       playRound(k);
-
     }else{
       alert("Set a number between 2 and 8.");
       document.getElementById("pl").innerHTML = "";
@@ -168,7 +177,6 @@ playRound = function(asd){
         }
       k++;
       document.getElementById("second_div").innerHTML += "<input type='button' value='set' onclick='playRound("+k+")' />";
-
   }else{
     alert("Finiti i 20 turni");
     var max=0;
@@ -183,12 +191,9 @@ playRound = function(asd){
   }
 }
 
-
-
 swapDiv = function(first_div,second_div){
-
-   d1 = document.getElementById(first_div);
-   d2 = document.getElementById(second_div);
+  d1 = document.getElementById(first_div);
+  d2 = document.getElementById(second_div);
     if( d2.style.display == "none" ){
       d1.style.display = "none";
       d2.style.display = "block";
@@ -197,19 +202,21 @@ swapDiv = function(first_div,second_div){
       d2.style.display = "none";
     }
 }
-    function generateTextBoxes() {
-      var a = parseInt(document.getElementById("n_players").value);
-        for (i = 1; i <= a; i++) {
-          var texte = "Player "+i+" <input type='text' style='width: 70px;' id='player_name"+i+"'/> Color <input type='text' style='width: 70px;' id='player_color"+i+"'/><br>";
-          document.getElementById("pl").innerHTML += texte;
-        }
+
+generateTextBoxes = function() {
+    var a = parseInt(document.getElementById("n_players").value);
+      for (i = 1; i <= a; i++) {
+        var texte = "Player "+i+" <input type='text' style='width: 70px;' id='player_name"+i+"'/> Color <input type='text' style='width: 70px;' id='player_color"+i+"'/><br>";
+        document.getElementById("pl").innerHTML += texte;
+      }
         document.getElementById("pl").innerHTML += "<input type='button' value='set' onclick='playGame("+a+")'>";
     }
 
-
-
-/*
-posizionare pedina
-
-
-*/
+movePos = function(playerDiv, squareDiv{
+    var player      = document.getElementById(playerDiv);
+    var lastSquare  = document.getElementById(player.parentNode.id);
+    var nextSquare  = document.getElementById(squareDiv);
+    var playerCopy  = player.cloneNode(true);
+    lastSquare.removeChild(player);
+    nextSquare.append(playerCopy);
+}
