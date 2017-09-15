@@ -1,14 +1,28 @@
 {
   "name": "monopoly",
   "version": "1.0.0",
-  "description": "a monopoly game",
-  "main": "./src/monopoly-all.js",
-  "scripts": {
-    "test": "mocha ./tests/**/*.js"
+  "description": "",
+  "main": "./src/table.html",
+  "directories": {
+    "test": "tests"
   },
-  "author": "reda kassame",
-  "license": "ISC",
   "dependencies": {
     "chai": "^4.1.2"
-  }
+  },
+  "devDependencies": {
+    "mocha": "^3.5.0"
+  },
+  "scripts": {
+    "test": "mocha ./tests/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deletefile/MonopolyJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Deletefile/MonopolyJS/issues"
+  },
+  "homepage": "https://github.com/Deletefile/MonopolyJS#readme"
 }

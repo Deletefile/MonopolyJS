@@ -1,5 +1,19 @@
-var assert = chai.assert;
+if (typeof require !== 'undefined') {
+
+var expect  = require('chai').expect;
+var assert  = require('chai').assert;
+var Monopoly= require('../src/monopoly.js');
+var Player  = require('../src/player.js');
+var Square  = require('../src/square.js');
+var Game    = require('../src/monopoly-all.js');
+
+}else{
+  var expect  = chai.expect;
+  var assert  = chai.assert;
+}
+/*
 var expect = chai.expect;
+*/
 
 describe('Monopoly Release1', function(){
   it("Create a Monopoly object with 5 players and 20 rounds", function() {
