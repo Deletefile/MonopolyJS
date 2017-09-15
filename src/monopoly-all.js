@@ -187,7 +187,7 @@ playRound = function(asd){
           monopoly.player[i].setTotalRounds(monopoly.player[i].totalRounds+1);
         }
       k++;
-      document.getElementById("second_div").innerHTML += "<input type='button' value='set' onclick='playRound("+k+")' />";
+      document.getElementById("second_div").innerHTML += "<input type='button' value='Next' onclick='playRound("+k+")' />";
   }else{
     alert("Finiti i 20 turni");
     var max=0;
@@ -220,7 +220,7 @@ generateTextBoxes = function() {
         var texte = "Player "+i+" <input type='text' style='width: 70px;' id='player_name"+i+"'/> Color <input type='text' style='width: 70px;' id='player_color"+i+"'/><br>";
         document.getElementById("pl").innerHTML += texte;
       }
-        document.getElementById("pl").innerHTML += "<input type='button' value='set' onclick='playGame("+a+")'>";
+        document.getElementById("pl").innerHTML += "<input type='button' value='Play' onclick='playGame("+a+")'>";
     }
 
 movePos = function(playerDiv, squareDiv){
