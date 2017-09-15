@@ -4,7 +4,7 @@ var Player = function(name, color, money){
   this.color  = color;
   this.money  = money;
   this.pos    = 0;
-  this.order  = 0;
+  this.totalRounds = 0;
 
   this.setPlayerMoney = function(amount){
     this.money = amount
@@ -12,6 +12,9 @@ var Player = function(name, color, money){
 
   this.setPosition = function(position){
     this.pos = position;
+  }
+  this.setTotalRounds = function(round){
+    this.totalRounds = round;
   }
 
   this.getPlayerColor = function(){
@@ -78,7 +81,7 @@ var Monopoly = function(rounds,players){
   this.dice1    = 0;
   this.dice2    = 0;
   this.rolled   = false;
-  var total     = 0;
+  this.total     = 0;
   var num       = 0;
 
   this.setPlayers = function(){
@@ -97,8 +100,7 @@ var Monopoly = function(rounds,players){
     this.dice1  = Math.floor(Math.random() * 6) + 1;
     this.dice2  = Math.floor(Math.random() * 6) + 1;
     this.rolled = true;
-    total = this.dice1+this.dice2;
-    return total;
+    this.total = this.dice1+this.dice2;
   }
 
   this.resetDice  = function(){
@@ -107,20 +109,15 @@ var Monopoly = function(rounds,players){
 
   this.movePlayer = function(id){
     var i = id;
-    num = this.player[i].getPlayerPos()+total;
-    var pop = "player"+id;
-      if(num>=39){
-        this.player[i].setPosition(this.player[i].getPlayerPos()+total-39);
-        var square = "square"+this.player[i].getPlayerPos();
-        movePos(pop,square);
+    num = this.player[i].getPlayerPos()+this.total;
+
+      if(num>39){
+        this.player[i].setPosition(this.player[i].getPlayerPos()+this.total-40);
+
         //give 200€ for pasing go or landing on go
         this.moneyToPlayer(200,i);
-          document.getElementById("second_div").innerHTML += "("+this.player[i].name+")"+this.player[i].pos+"<br>";
       }else{
-        this.player[i].setPosition(this.player[i].getPlayerPos()+total);
-        var square = "square"+this.player[i].getPlayerPos();
-        movePos(pop,square);
-          document.getElementById("second_div").innerHTML += "("+this.player[i].name+")"+this.player[i].pos+"<br>";
+        this.player[i].setPosition(this.player[i].getPlayerPos()+this.total);
     }
       if(this.player[i].getPlayerPos() == 30){
         //the player is in jail
@@ -129,10 +126,13 @@ var Monopoly = function(rounds,players){
       }
       if(this.player[i].getPlayerPos() == 4){
         //income TAX
-        if(this.player[i].money*20/100 < 200){
-          this.moneyFromPlayer(this.player[i].money*20/100,i);
-        }else{
-          this.moneyFromPlayer(200,i);
+        var itax = this.player[i].money*10/100;
+          if(this.player[i].money != 0){
+            if(itax < 200){
+              this.moneyFromPlayer(itax,i);
+            }else{
+              this.moneyFromPlayer(200,i);
+          }
         }
       }
       if(this.player[i].getPlayerPos() == 38){
@@ -149,13 +149,19 @@ var Monopoly = function(rounds,players){
     this.player[id].setPlayerMoney(this.player[id].money-amount);
   }
 };
+checkPlayersNumber = function(n){
+  if(n>= 2 && n<=8){
+    return true;
+  }else{
+    return false;
+  }
+}
 
 playGame = function(number){
   var numPlayers = number;
-    if(numPlayers>=2 && numPlayers<=8){
+  if(checkPlayersNumber(numPlayers) == true){
+    //if(numPlayers>=2 && numPlayers<=8){
       monopoly = new Monopoly(20,numPlayers);
-      document.getElementById("second_div").innerHTML += "[*]Genero "+monopoly.players+" giocatori.<br>";
-      document.getElementById("second_div").innerHTML += "[*]Setto i giocatori.<br>";
       monopoly.setPlayers();
       var k = 1;
       playRound(k);
@@ -173,7 +179,12 @@ playRound = function(asd){
         for(var i=1; i<=monopoly.players; i++){
           monopoly.rollDice();
           monopoly.movePlayer(i);
+          var div_square = "square"+monopoly.player[i].getPlayerPos();
+          var div_player = "player"+i;
+          movePos(div_player,div_square);
+          document.getElementById("second_div").innerHTML += "("+monopoly.player[i].name+") lancia i due dadi e fa "+monopoly.total+": si sposta nella casella = "+monopoly.player[i].pos+"<br>";
           monopoly.resetDice();
+          monopoly.player[i].setTotalRounds(monopoly.player[i].totalRounds+1);
         }
       k++;
       document.getElementById("second_div").innerHTML += "<input type='button' value='set' onclick='playRound("+k+")' />";
@@ -212,7 +223,7 @@ generateTextBoxes = function() {
         document.getElementById("pl").innerHTML += "<input type='button' value='set' onclick='playGame("+a+")'>";
     }
 
-movePos = function(playerDiv, squareDiv{
+movePos = function(playerDiv, squareDiv){
     var player      = document.getElementById(playerDiv);
     var lastSquare  = document.getElementById(player.parentNode.id);
     var nextSquare  = document.getElementById(squareDiv);
